@@ -14,7 +14,7 @@
     <h1>🔎 SaleDraft AI Style Hindi Text Reader</h1>
     <p>PDF/Image से Hindi-English text निकालें • Direct PDF Text First • OCR fallback • Hindi cleanup • TXT/Word download</p>
   </div>
-  <div class="note">⚠️ यह single HTML version है। Computer-generated PDF में direct text बहुत अच्छा निकलेगा। Scan/photo में browser OCR चलेगा, इसलिए साफ़ photo/PDF रखें।</div>
+  <div class="note">⚠️ यह single HTML version है। Hindi PDF में font encoding खराब हो तो Direct Text गड़बड़ हो सकता है। इसलिए PDF का default mode Hindi OCR रखा है। English words English रहेंगे और Hindi text Hindi रहेगा।</div>
 
   <div class="grid">
     <div class="card">
@@ -29,7 +29,7 @@
       <h2>2) PDF → Text / OCR</h2>
       <label>PDF चुनें</label><input id="pdfFile" type="file" accept="application/pdf">
       <label>Pages optional</label><input id="pages" placeholder="जैसे 1-3 या 1,2,5; blank = first 5 pages">
-      <label>Mode</label><select id="mode"><option value="auto">Auto: Direct Text, जरूरत पर OCR</option><option value="direct">Direct PDF Text only</option><option value="ocr">Force OCR</option></select>
+      <label>Mode</label><select id="mode"><option value="ocr" selected>Hindi PDF OCR Mode (best for Hindi PDF)</option><option value="auto">Auto: Direct Text, जरूरत पर OCR</option><option value="direct">Direct PDF Text only</option></select>
       <button class="btn" onclick="readPDF()">Extract Text from PDF</button>
     </div>
   </div>
@@ -63,10 +63,10 @@ const $=id=>document.getElementById(id);function setStatus(t,p){$('status').text
 $('imgFile').addEventListener('change',()=>{const f=$('imgFile').files[0]; if(f){$('preview').src=URL.createObjectURL(f);$('preview').style.display='block'}});
 async function readImage(){const f=$('imgFile').files[0]; if(!f)return alert('Image select करें'); $('out').value=''; setStatus('OCR चल रहा है...',5); const lang=$('imgLang').value; const res=await Tesseract.recognize(f,lang,{logger:m=>{if(m.progress)setStatus(m.status,Math.round(m.progress*100))}}); $('out').value=cleanBasic(res.data.text); setStatus('Done',100)}
 function parsePages(txt,max){if(!txt)return [...Array(Math.min(max,5)).keys()].map(i=>i+1);let s=new Set();txt.split(',').forEach(part=>{part=part.trim();if(part.includes('-')){let[a,b]=part.split('-').map(Number);for(let i=a;i<=Math.min(b,max);i++)if(i>0)s.add(i)}else{let n=Number(part);if(n>0&&n<=max)s.add(n)}});return [...s]}
-async function readPDF(){const f=$('pdfFile').files[0]; if(!f)return alert('PDF select करें'); $('out').value=''; setStatus('PDF पढ़ रहा है...',5); const buf=await f.arrayBuffer(); const pdf=await pdfjsLib.getDocument({data:buf}).promise; const pages=parsePages($('pages').value,pdf.numPages); let final=''; for(let idx=0; idx<pages.length; idx++){let n=pages[idx]; setStatus('Page '+n+' direct text...',Math.round((idx/pages.length)*80)); const page=await pdf.getPage(n); let direct=''; if($('mode').value!=='ocr'){const tc=await page.getTextContent(); direct=tc.items.map(x=>x.str).join(' ').replace(/\s+/g,' ').trim()} if(direct && $('mode').value!=='ocr'){final += `\n--- Page ${n} ---\n`+direct+'\n'} else {setStatus('Page '+n+' OCR...',Math.round((idx/pages.length)*80)); const vp=page.getViewport({scale:2.2}); const canvas=document.createElement('canvas'); canvas.width=vp.width; canvas.height=vp.height; await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise; const res=await Tesseract.recognize(canvas,'hin+eng'); final += `\n--- Page ${n} ---\n`+res.data.text+'\n'} }
+async function readPDF(){const f=$('pdfFile').files[0]; if(!f)return alert('PDF select करें'); $('out').value=''; setStatus('PDF पढ़ रहा है...',5); const buf=await f.arrayBuffer(); const pdf=await pdfjsLib.getDocument({data:buf}).promise; const pages=parsePages($('pages').value,pdf.numPages); let final=''; for(let idx=0; idx<pages.length; idx++){let n=pages[idx]; setStatus('Page '+n+' direct text...',Math.round((idx/pages.length)*80)); const page=await pdf.getPage(n); let direct=''; if($('mode').value!=='ocr'){const tc=await page.getTextContent(); direct=tc.items.map(x=>x.str).join(' ').replace(/\s+/g,' ').trim()} if(direct && $('mode').value!=='ocr'){final += `\n--- Page ${n} ---\n`+direct+'\n'} else {setStatus('Page '+n+' OCR...',Math.round((idx/pages.length)*80)); const vp=page.getViewport({scale:3.2}); const canvas=document.createElement('canvas'); canvas.width=vp.width; canvas.height=vp.height; await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise; const res=await Tesseract.recognize(canvas,'hin+eng',{logger:m=>{if(m.progress)setStatus('OCR '+Math.round(m.progress*100)+'%',Math.min(99,Math.round((idx/pages.length)*80 + m.progress*15)))}}); final += `\n--- Page ${n} ---\n`+res.data.text+'\n'} }
  $('out').value=cleanBasic(final.trim()); setStatus('Done',100)}
 function cleanBasic(t){return t.replace(/\r/g,'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').trim()}
-function cleanupHindi(){let t=$('out').value; const pairs=[[' Haryana Govt. Gaz.','Haryana Govt. Gaz.'],[' mins',' मिनट'],[' मिन ',' मिनट '],[' गावं',' गांव'],[' जमिन',' जमीन'],[' रजिसटी',' रजिस्ट्री'],[' Desraj colony','Desraj colony'],[' Khasra','Khasra']]; pairs.forEach(([a,b])=>t=t.split(a).join(b)); $('out').value=cleanBasic(t); setStatus('Hindi cleanup done',100)}
+function cleanupHindi(){let t=$('out').value; const pairs=[[' गावं',' गांव'],[' जमिन',' जमीन'],[' रजिसटी',' रजिस्ट्री'],[' रजिस्ट्रि',' रजिस्ट्री'],[' अधिसुचना',' अधिसूचना'],[' खसरा नं',' खसरा नंबर'],[' हरियाना',' हरियाणा'],[' पानीपत',' पानीपत'],[' जमाबन्दी',' जमाबंदी']]; pairs.forEach(([a,b])=>t=t.split(a).join(b)); $('out').value=cleanBasic(t); setStatus('Hindi cleanup done: English शब्द English ही रहेंगे',100)}
 async function copyText(){await navigator.clipboard.writeText($('out').value); setStatus('Copied',100)}
 function downloadTxt(){dl('extracted_text.txt',$('out').value,'text/plain;charset=utf-8')}
 function downloadDoc(){let html='<!doctype html><html><head><meta charset="utf-8"></head><body><pre style="font-family:Noto Sans Devanagari,Arial;white-space:pre-wrap">'+esc($('out').value)+'</pre></body></html>';dl('extracted_text.doc',html,'application/msword;charset=utf-8')}
@@ -75,4 +75,3 @@ function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 </script>
 </body>
 </html>
-
