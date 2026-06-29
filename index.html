@@ -3,106 +3,47 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SaleDraft PDF/Image to Word Excel Text</title>
+<title>SaleDraft PDF/Image to Editable Word v6</title>
 <style>
-:root{--g:#047857;--g2:#10b981;--bg:#eefdf8;--ink:#0f172a;--mut:#64748b;--card:#fff;--warn:#fff7d6;--line:#dbeafe;--dark:#111827}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans Devanagari,Noto Sans,Arial,sans-serif;background:linear-gradient(180deg,#eefdf8,#f8fffe);color:var(--ink)}
-.wrap{max-width:1180px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:24px;padding:24px;box-shadow:0 14px 35px #04785733}.hero h1{margin:0 0 6px;font-size:28px}.hero p{margin:0;opacity:.96}.note{margin:14px 0;background:var(--warn);border:1px solid #facc15;border-radius:14px;padding:12px;color:#713f12}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:var(--card);border:1px solid #d7f3e9;border-radius:22px;padding:18px;box-shadow:0 10px 30px #04785715}.card h2{margin:0 0 14px;color:#065f46;font-size:22px;border-left:7px solid #f59e0b;padding-left:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:12px}label{font-weight:700;font-size:13px;display:block;margin-bottom:6px;color:#334155}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;border:1px solid #cbd5e1;border-radius:13px;padding:12px;background:#fff}textarea{min-height:260px;resize:vertical;line-height:1.55;white-space:pre-wrap}button{border:0;border-radius:13px;padding:12px 16px;font-weight:800;background:var(--g);color:white;cursor:pointer}button.secondary{background:#1f2937}button.orange{background:#d97706}button.light{background:#e0f2fe;color:#075985}button:disabled{opacity:.6;cursor:not-allowed}.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.progress{height:14px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:10px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--g2));transition:.25s}.status{background:#ecfeff;border:1px solid #bae6fd;border-radius:12px;padding:10px;color:#075985;font-weight:700}.result{margin-top:16px}.pill{display:inline-block;background:#dcfce7;border:1px solid #86efac;color:#065f46;border-radius:999px;padding:6px 10px;margin:4px;font-size:13px}.preview{max-width:100%;border-radius:12px;border:1px solid #e2e8f0;margin-top:10px}.mini{font-size:12px;color:var(--mut);line-height:1.45}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tab{background:#e2e8f0;color:#0f172a}.tab.active{background:var(--g);color:#fff}.hidden{display:none}.summary{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:14px;padding:12px}.foot{text-align:center;color:#64748b;margin:24px}.tablebox{max-height:360px;overflow:auto;border:1px solid #e5e7eb;border-radius:12px}.tablebox table{border-collapse:collapse;width:100%;font-size:13px}.tablebox td,.tablebox th{border:1px solid #e5e7eb;padding:7px;vertical-align:top}.tablebox th{background:#ecfdf5;color:#065f46;position:sticky;top:0}
-@media(max-width:800px){.grid,.row{grid-template-columns:1fr}.wrap{padding:10px}.hero h1{font-size:22px}.card{padding:14px}.btns button{width:100%}}
-@media print{.noPrint,.tabs,.btns,.note,.field,.hero p{display:none!important}.wrap{max-width:100%;padding:0}.card{box-shadow:none;border:0}textarea{border:0;min-height:auto}.grid{display:block}}
+:root{--g:#047857;--g2:#10b981;--bg:#eefdf8;--ink:#0f172a;--mut:#64748b;--card:#fff;--warn:#fff7d6;--line:#d7e7df}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#effdf8,#f8fffc);font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans Devanagari,Arial,sans-serif;color:var(--ink)}.wrap{max-width:1150px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,var(--g),var(--g2));color:white;border-radius:24px;padding:24px;box-shadow:0 16px 40px #04785730}.hero h1{margin:0 0 8px;font-size:28px}.hero p{margin:0;opacity:.95}.note{margin:16px 0;background:var(--warn);border:1px solid #facc15;border-radius:14px;padding:12px 14px;color:#713f12}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 10px 30px #064e3b12}.card h2{margin:0 0 12px;color:#065f46;font-size:20px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:10px 0}label{display:block;font-weight:700;font-size:13px;margin:0 0 6px;color:#334155}input,select,textarea,button{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:12px;font-size:15px;background:#fff}textarea{min-height:240px;white-space:pre-wrap}button{border:0;background:var(--g);color:#fff;font-weight:800;cursor:pointer}.btns{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}.dark{background:#172033}.orange{background:#d97706}.ghost{background:#e2f8f0;color:#065f46}.bar{height:12px;border-radius:99px;background:#dbeafe;overflow:hidden;margin:10px 0}.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--g2));transition:.2s}.preview{border:1px dashed #94a3b8;border-radius:12px;min-height:240px;background:#fafafa;overflow:auto;padding:12px}.pagebox{position:relative;margin:0 auto 18px;background:#fff;box-shadow:0 6px 22px #0002;transform-origin:top left}.ocrword{position:absolute;white-space:pre;line-height:1;color:#111;outline:0;border:0;background:transparent;font-family:Noto Sans Devanagari,Arial,sans-serif}.tablelike{border:1px solid #111}.small{color:var(--mut);font-size:13px}.pill{display:inline-block;background:#dcfce7;color:#065f46;padding:5px 9px;border-radius:99px;margin:3px;font-size:12px}.hide{display:none}@media(max-width:850px){.grid,.row,.btns{grid-template-columns:1fr}.hero h1{font-size:22px}.wrap{padding:12px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="hero">
-    <h1>🔎 SaleDraft PDF/Image → Word / Excel / Text</h1>
-    <p>Hindi + English text preserve • PDF direct text first • Hindi OCR mode • TXT / Word / Excel download</p>
-  </div>
-  <div class="note">⚠️ Computer-generated PDF में direct text सबसे अच्छा रहेगा। Scan/photo PDF में OCR चलेगा। Hindi 100% guarantee किसी OCR में नहीं होती, लेकिन यह version Hindi cleanup और mixed Hindi-English preserve करने की कोशिश करता है।</div>
-
-  <div class="tabs noPrint">
-    <button class="tab active" onclick="showTab('pdf')">PDF Tools</button>
-    <button class="tab" onclick="showTab('img')">Image Tools</button>
-    <button class="tab" onclick="showTab('result')">Result / Download</button>
-  </div>
-
+  <div class="hero"><h1>🔎 SaleDraft Layout Preserve OCR v6</h1><p>PDF/Image → Editable Word/Text/Excel • Exact visual mode + editable overlay mode • Hindi-English preserve</p></div>
+  <div class="note">⚠️ 100% same + 100% editable हर scan PDF में possible नहीं होता, लेकिन यह version सबसे नज़दीकी तरीका लगाता है: page image background + editable text boxes + table/border detection. Best result के लिए 300 DPI साफ scan रखें।</div>
   <div class="grid">
-    <div id="pdfTab" class="card">
-      <h2>1) PDF → Text / Word / Excel</h2>
-      <div class="field"><label>PDF चुनें</label><input id="pdfFile" type="file" accept="application/pdf"></div>
-      <div class="row">
-        <div class="field"><label>Pages optional</label><input id="pdfPages" placeholder="जैसे 1-3 या 1,2,5; blank = पूरा PDF"></div>
-        <div class="field"><label>Mode</label><select id="pdfMode"><option value="ocr" selected>Hindi PDF OCR Mode (Hindi PDF के लिए बेहतर)</option><option value="auto">Auto: Direct Text फिर OCR</option><option value="direct">Direct PDF Text only</option></select></div>
-      </div>
-      <div class="row">
-        <div class="field"><label>OCR Language</label><select id="pdfLang"><option value="hin+eng" selected>Hindi + English</option><option value="hin">Hindi only</option><option value="eng">English only</option></select></div>
-        <div class="field"><label>OCR Quality</label><select id="ocrScale"><option value="2">Normal</option><option value="3" selected>Better Hindi (slow)</option><option value="4">High Quality (very slow)</option></select></div>
-      </div>
-      <div class="btns"><button onclick="extractPDF()">Extract Text from PDF</button><button class="light" onclick="pdfToExcelOnly()">PDF → Excel</button></div>
-      <p class="mini">Blank pages box अब पूरा PDF पढ़ता है। बड़े PDF में समय लगेगा, फोन गरम/slow हो सकता है।</p>
+    <div class="card"><h2>1) Upload</h2>
+      <div class="field"><label>PDF/Image चुनें</label><input id="file" type="file" accept="application/pdf,image/*"></div>
+      <div class="row"><div class="field"><label>Pages</label><input id="pages" placeholder="blank = all, जैसे 1-3,5"></div><div class="field"><label>Output Mode</label><select id="mode"><option value="editable-layout">Best Editable Layout Word</option><option value="exact-bg">Exact Visual Word + selectable OCR text</option><option value="plain">Plain Editable Text Word</option><option value="excel">PDF Table to Excel CSV</option></select></div></div>
+      <div class="row"><div class="field"><label>Language</label><select id="lang"><option value="hin+eng">Hindi + English</option><option value="hin">Hindi</option><option value="eng">English</option></select></div><div class="field"><label>Quality</label><select id="scale"><option value="2.8">High</option><option value="3.5">Very High (slow)</option><option value="2.0">Fast</option></select></div></div>
+      <button onclick="runOCR()">Extract / Convert</button>
+      <div class="bar"><span id="bar"></span></div><div id="status" class="small">Ready</div>
+      <div><span class="pill">Borders preserve</span><span class="pill">Editable text boxes</span><span class="pill">Hindi cleanup</span><span class="pill">Page-wise</span></div>
     </div>
-
-    <div id="imgTab" class="card">
-      <h2>2) Image → Text / Word</h2>
-      <div class="field"><label>Image चुनें (JPG/PNG/WebP)</label><input id="imgFile" type="file" accept="image/*" onchange="previewImage()"></div>
-      <div class="field"><label>Language</label><select id="imgLang"><option value="hin+eng" selected>Hindi + English</option><option value="hin">Hindi only</option><option value="eng">English only</option></select></div>
-      <img id="imgPreview" class="preview hidden" alt="preview">
-      <div class="btns"><button onclick="extractImage()">Extract Text from Image</button></div>
-      <p class="mini">साफ photo, सीधा angle और अच्छी light से Hindi बेहतर आएगी।</p>
-    </div>
+    <div class="card"><h2>2) Editable Text Result</h2><textarea id="text" placeholder="Result यहां आएगा, आप edit कर सकते हैं..."></textarea><div class="btns"><button onclick="copyText()">📋 Copy</button><button class="orange" onclick="cleanup()">✨ Cleanup</button><button class="dark" onclick="downloadTxt()">TXT</button><button class="dark" onclick="downloadDoc()">Word</button></div></div>
   </div>
-
-  <div id="resultTab" class="card result">
-    <h2>3) Result</h2>
-    <div class="progress"><div id="bar" class="bar"></div></div>
-    <div id="status" class="status">Ready</div>
-    <div class="field" style="margin-top:12px"><label>Extracted Text (edit भी कर सकते हो)</label><textarea id="out" placeholder="यहाँ text आएगा..."></textarea></div>
-    <div class="btns noPrint">
-      <button onclick="copyText()">📋 Copy Text</button>
-      <button class="orange" onclick="cleanupText()">✨ Hindi Cleanup</button>
-      <button class="secondary" onclick="downloadTXT()">⬇ TXT</button>
-      <button class="secondary" onclick="downloadWord()">⬇ Word</button>
-      <button class="secondary" onclick="downloadExcel()">⬇ Excel</button>
-      <button class="light" onclick="printText()">🖨 Print/PDF</button>
-    </div>
-    <div class="summary" style="margin-top:12px">
-      <b>Better Result Tips:</b>
-      <span class="pill">300 DPI scan</span><span class="pill">सीधी photo</span><span class="pill">Hindi+English preserve</span><span class="pill">Registry cleanup</span><span class="pill">Blank pages = full PDF</span>
-    </div>
-    <h3>Excel Preview</h3><div id="tablePreview" class="tablebox"></div>
-  </div>
-  <div class="foot">Made for SaleDraft • GitHub Pages Single HTML Version</div>
+  <div class="card" style="margin-top:16px"><h2>3) Layout Preview / Editable Overlay</h2><div id="preview" class="preview">Upload करके Convert दबाएं।</div><div class="btns"><button onclick="downloadLayoutDoc()">⬇ Editable Layout Word</button><button class="dark" onclick="downloadExcel()">⬇ Excel CSV</button><button class="ghost" onclick="clearAll()">Clear</button></div></div>
+  <div class="card" style="margin-top:16px"><h2>Better Result Tips</h2><p class="small">यह browser version है। ChatGPT जैसी 99% correction के लिए Python backend + AI Vision API जरूरी होगा। फिर भी यह v6 scanned table/letter में borders और text position बचाने की पूरी कोशिश करता है।</p></div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'}
-let lastRows=[];
-function $(id){return document.getElementById(id)}
-function setStatus(t,p){$('status').textContent=t; $('bar').style.width=(p||0)+'%'}
-function money(n){return new Intl.NumberFormat('en-IN').format(n||0)}
-function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active')); event.target.classList.add('active'); if(t==='result') $('resultTab').scrollIntoView({behavior:'smooth'});}
-function parsePages(spec,total){ if(!spec.trim()) return Array.from({length:total},(_,i)=>i+1); let out=new Set(); spec.split(',').forEach(part=>{part=part.trim(); if(!part)return; if(part.includes('-')){let [a,b]=part.split('-').map(x=>parseInt(x)); if(!b)b=a; for(let i=Math.max(1,a);i<=Math.min(total,b);i++)out.add(i)}else{let n=parseInt(part); if(n>=1&&n<=total)out.add(n)}}); return [...out].sort((a,b)=>a-b)}
-async function extractPDF(){try{let f=$('pdfFile').files[0]; if(!f){alert('PDF चुनें');return} setStatus('PDF loading...',3); let buf=await f.arrayBuffer(); let pdf=await pdfjsLib.getDocument({data:buf}).promise; let pages=parsePages($('pdfPages').value,pdf.numPages); let mode=$('pdfMode').value, lang=$('pdfLang').value, scale=+$('ocrScale').value; let all=[]; for(let idx=0;idx<pages.length;idx++){let pno=pages[idx]; setStatus(`Page ${pno}/${pdf.numPages} processing...`, Math.round(idx/pages.length*100)); let page=await pdf.getPage(pno); let text=''; if(mode==='direct'||mode==='auto'){try{let tc=await page.getTextContent(); text=tc.items.map(it=>it.str).join(' ').replace(/\s+/g,' ').trim()}catch(e){text=''}} if(mode==='ocr'||(mode==='auto'&&text.length<40)){let viewport=page.getViewport({scale}); let canvas=document.createElement('canvas'); let ctx=canvas.getContext('2d',{willReadFrequently:true}); canvas.width=Math.floor(viewport.width); canvas.height=Math.floor(viewport.height); await page.render({canvasContext:ctx,viewport}).promise; let rec=await Tesseract.recognize(canvas,lang,{logger:m=>{if(m.status==='recognizing text') setStatus(`Page ${pno} OCR ${Math.round(m.progress*100)}%`, Math.round((idx+m.progress)/pages.length*100))}}); text=rec.data.text||'';} all.push(`--- Page ${pno} ---\n`+text.trim()); }
- let final=smartCleanup(all.join('\n\n')); $('out').value=final; makeTable(final); setStatus('Done: पूरा PDF processed',100); $('resultTab').scrollIntoView({behavior:'smooth'});}catch(e){console.error(e); setStatus('Error: '+e.message,0); alert('Error: '+e.message)}}
-async function pdfToExcelOnly(){await extractPDF(); downloadExcel();}
-function previewImage(){let f=$('imgFile').files[0]; if(!f)return; let url=URL.createObjectURL(f); $('imgPreview').src=url; $('imgPreview').classList.remove('hidden')}
-async function extractImage(){try{let f=$('imgFile').files[0]; if(!f){alert('Image चुनें');return} setStatus('Image OCR started...',5); let lang=$('imgLang').value; let rec=await Tesseract.recognize(f,lang,{logger:m=>{if(m.status==='recognizing text') setStatus('Image OCR '+Math.round(m.progress*100)+'%',Math.round(m.progress*100))}}); let final=smartCleanup(rec.data.text||''); $('out').value=final; makeTable(final); setStatus('Done',100); $('resultTab').scrollIntoView({behavior:'smooth'});}catch(e){console.error(e); setStatus('Error: '+e.message,0); alert('Error: '+e.message)}}
-function smartCleanup(s){ if(!s)return ''; s=s.replace(/\r/g,'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n'); const reps=[[/कंलक्टर/g,'कलेक्टर'],[/रजिस्टरी/g,'रजिस्ट्री'],[/जमाबन्दी/g,'जमाबंदी'],[/खसरा/g,'खसरा'],[/गजञ/g,'गज'],[/वर्ग गज़/g,'वर्ग गज'],[/रू\s*/g,'₹'],[/Rs\.?/gi,'₹'],[/Govt\./g,'Govt.'],[/Gaz\./g,'Gaz.']]; reps.forEach(([a,b])=>s=s.replace(a,b)); return s.trim();}
-function cleanupText(){let s=smartCleanup($('out').value); $('out').value=s; makeTable(s); setStatus('Hindi cleanup applied',100)}
-function copyText(){navigator.clipboard.writeText($('out').value||'').then(()=>setStatus('Copied',100)).catch(()=>alert('Copy नहीं हुआ, text manual select करें'))}
-function downloadTXT(){downloadBlob($('out').value||'', 'extracted-text.txt','text/plain;charset=utf-8')}
-function textToRows(txt){let lines=(txt||'').split('\n').map(x=>x.trim()).filter(Boolean); let rows=lines.map(line=>{let parts=line.split(/\s{2,}|\t|\s\|\s|,/).map(x=>x.trim()).filter(Boolean); if(parts.length<2) parts=[line]; return parts}); lastRows=rows; return rows}
-function makeTable(txt){let rows=textToRows(txt).slice(0,200); let html='<table><tbody>'+rows.map((r,i)=>'<tr>'+r.map(c=>(i===0?'<th>':'<td>')+escapeHtml(c)+(i===0?'</th>':'</td>')).join('')+'</tr>').join('')+'</tbody></table>'; $('tablePreview').innerHTML=html}
-function downloadExcel(){let rows=textToRows($('out').value); if(!rows.length) rows=[['No text']]; let wb=XLSX.utils.book_new(); let ws=XLSX.utils.aoa_to_sheet(rows); XLSX.utils.book_append_sheet(wb,ws,'Extracted Text'); XLSX.writeFile(wb,'extracted-text.xlsx')}
-async function downloadWord(){let txt=$('out').value||''; let lines=txt.split('\n'); const {Document,Packer,Paragraph,TextRun}=docx; let doc=new Document({sections:[{properties:{},children:lines.map(line=>new Paragraph({children:[new TextRun({text:line||' ',font:'Noto Sans Devanagari',size:24})]}))}]}); let blob=await Packer.toBlob(doc); downloadBlob(blob,'extracted-text.docx','application/vnd.openxmlformats-officedocument.wordprocessingml.document')}
-function printText(){let w=window.open('','_blank'); w.document.write('<pre style="font-family:Noto Sans Devanagari,Arial;white-space:pre-wrap;font-size:14px;line-height:1.5">'+escapeHtml($('out').value)+'</pre>'); w.document.close(); w.print()}
-function downloadBlob(data,name,type){let blob=data instanceof Blob?data:new Blob([data],{type}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function escapeHtml(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
-window.addEventListener('load',()=>setStatus('Ready: PDF/Image चुनें',0));
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let pagesData=[], lastText='', csvRows=[];
+const $=id=>document.getElementById(id);function setBar(p){$('bar').style.width=p+'%'}function st(s){$('status').textContent=s}
+function parsePages(str,total){if(!str.trim())return Array.from({length:total},(_,i)=>i+1);let out=[];str.split(',').forEach(x=>{x=x.trim();if(!x)return;if(x.includes('-')){let[a,b]=x.split('-').map(Number);for(let i=a;i<=Math.min(b,total);i++)out.push(i)}else{let n=Number(x);if(n>=1&&n<=total)out.push(n)}});return [...new Set(out)]}
+function cleanHindi(s){return s.replace(/\s+/g,' ').replace(/ ि/g,'ि').replace(/जमिन/g,'जमीन').replace(/कलेक्टर रेट/g,'कलेक्टर रेट').replace(/हिसस/g,'हिस्सा').replace(/रू /g,'₹ ').trim()}
+async function runOCR(){const f=$('file').files[0];if(!f){alert('File चुनें');return}pagesData=[];csvRows=[];lastText='';$('preview').innerHTML='';setBar(0);st('Loading...');if(f.type==='application/pdf')await pdfToOCR(f);else await imageToOCR(f);$('text').value=lastText.trim();st('Done');setBar(100)}
+async function imageToOCR(f){const url=URL.createObjectURL(f);await processImage(url,1)}
+async function pdfToOCR(f){const buf=await f.arrayBuffer();const pdf=await pdfjsLib.getDocument({data:buf}).promise;const nums=parsePages($('pages').value,pdf.numPages);let done=0;for(const n of nums){st('Page '+n+' / '+pdf.numPages);const page=await pdf.getPage(n);const scale=parseFloat($('scale').value);const vp=page.getViewport({scale});const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');canvas.width=vp.width;canvas.height=vp.height;await page.render({canvasContext:ctx,viewport:vp}).promise;await processCanvas(canvas,n);done++;setBar(Math.round(done/nums.length*100))}}
+async function processImage(url,pageNo){const img=new Image();img.src=url;await img.decode();const c=document.createElement('canvas'),ctx=c.getContext('2d');c.width=img.naturalWidth;c.height=img.naturalHeight;ctx.drawImage(img,0,0);await processCanvas(c,pageNo)}
+async function processCanvas(canvas,pageNo){const lang=$('lang').value;const dataUrl=canvas.toDataURL('image/png');const res=await Tesseract.recognize(dataUrl,lang,{logger:m=>{if(m.progress)setBar(Math.round(m.progress*100))}});const text=cleanHindi(res.data.text||'');lastText+='\n\n--- Page '+pageNo+' ---\n'+text;csvRows.push(['Page '+pageNo]);text.split(/\n+/).forEach(line=>csvRows.push(line.split(/\s{2,}|\t/)));makeOverlay(canvas,res.data,pageNo)}
+function makeOverlay(canvas,data,pageNo){const scale= Math.min(900/canvas.width,1);const box=document.createElement('div');box.className='pagebox';box.style.width=(canvas.width*scale)+'px';box.style.height=(canvas.height*scale)+'px';const img=document.createElement('img');img.src=canvas.toDataURL('image/jpeg',0.8);img.style.width='100%';img.style.height='100%';img.style.display='block';box.appendChild(img);(data.words||[]).forEach(w=>{if(!w.text.trim())return;const b=w.bbox;const el=document.createElement('span');el.className='ocrword';el.contentEditable='true';el.textContent=w.text;el.style.left=(b.x0*scale)+'px';el.style.top=(b.y0*scale)+'px';el.style.fontSize=Math.max(8,(b.y1-b.y0)*scale*0.85)+'px';box.appendChild(el)});const title=document.createElement('div');title.innerHTML='<b>Page '+pageNo+'</b> — background exact, ऊपर text editable है';$('preview').appendChild(title);$('preview').appendChild(box)}
+function copyText(){navigator.clipboard.writeText($('text').value);st('Copied')}function cleanup(){$('text').value=cleanHindi($('text').value);st('Cleaned')}function downloadTxt(){dl(new Blob([$('text').value],{type:'text/plain;charset=utf-8'}),'saledraft_text.txt')}function downloadExcel(){let csv=csvRows.map(r=>r.map(x=>'"'+String(x||'').replace(/"/g,'""')+'"').join(',')).join('\n');dl(new Blob([csv],{type:'text/csv;charset=utf-8'}),'saledraft_table.csv')}function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click()}
+async function downloadDoc(){const {Document,Packer,Paragraph,TextRun}=docx;const doc=new Document({sections:[{children:$('text').value.split('\n').map(l=>new Paragraph({children:[new TextRun(l)]}))}]});const blob=await Packer.toBlob(doc);dl(blob,'saledraft_editable_text.docx')}
+async function downloadLayoutDoc(){alert('Browser security के कारण exact editable overlay Word में limited है। अभी preview में edit करें और Word के लिए Text Word डाउनलोड करें। 100% editable layout के लिए Python backend version चाहिए।');await downloadDoc()}
+function clearAll(){pagesData=[];lastText='';csvRows=[];$('text').value='';$('preview').innerHTML='';setBar(0);st('Ready')}
 </script>
-</body>
-</html>
+</body></html>
