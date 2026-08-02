@@ -1,49 +1,559 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SaleDraft PDF/Image to Editable Word v6</title>
-<style>
-:root{--g:#047857;--g2:#10b981;--bg:#eefdf8;--ink:#0f172a;--mut:#64748b;--card:#fff;--warn:#fff7d6;--line:#d7e7df}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#effdf8,#f8fffc);font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans Devanagari,Arial,sans-serif;color:var(--ink)}.wrap{max-width:1150px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,var(--g),var(--g2));color:white;border-radius:24px;padding:24px;box-shadow:0 16px 40px #04785730}.hero h1{margin:0 0 8px;font-size:28px}.hero p{margin:0;opacity:.95}.note{margin:16px 0;background:var(--warn);border:1px solid #facc15;border-radius:14px;padding:12px 14px;color:#713f12}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 10px 30px #064e3b12}.card h2{margin:0 0 12px;color:#065f46;font-size:20px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:10px 0}label{display:block;font-weight:700;font-size:13px;margin:0 0 6px;color:#334155}input,select,textarea,button{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:12px;font-size:15px;background:#fff}textarea{min-height:240px;white-space:pre-wrap}button{border:0;background:var(--g);color:#fff;font-weight:800;cursor:pointer}.btns{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}.dark{background:#172033}.orange{background:#d97706}.ghost{background:#e2f8f0;color:#065f46}.bar{height:12px;border-radius:99px;background:#dbeafe;overflow:hidden;margin:10px 0}.bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--g2));transition:.2s}.preview{border:1px dashed #94a3b8;border-radius:12px;min-height:240px;background:#fafafa;overflow:auto;padding:12px}.pagebox{position:relative;margin:0 auto 18px;background:#fff;box-shadow:0 6px 22px #0002;transform-origin:top left}.ocrword{position:absolute;white-space:pre;line-height:1;color:#111;outline:0;border:0;background:transparent;font-family:Noto Sans Devanagari,Arial,sans-serif}.tablelike{border:1px solid #111}.small{color:var(--mut);font-size:13px}.pill{display:inline-block;background:#dcfce7;color:#065f46;padding:5px 9px;border-radius:99px;margin:3px;font-size:12px}.hide{display:none}@media(max-width:850px){.grid,.row,.btns{grid-template-columns:1fr}.hero h1{font-size:22px}.wrap{padding:12px}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Reader</title>
+  <style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f6f4;color:#202124;font-family:Arial,sans-serif}
+header{background:#087c3e;color:#fff;text-align:center;padding:15px;font-size:23px;font-weight:700}
+.version{font-size:12px;font-weight:400;opacity:.9}
+.container{width:96%;max-width:1280px;margin:16px auto 40px}
+.upload-card,.file-list,.progress-card,.table-card{background:#fff;border-radius:12px;margin-top:12px}
+.upload-card{padding:22px 14px;text-align:center;border:2px dashed #087c3e}
+.upload-card h1{margin:0 0 8px;font-size:22px}
+.upload-card p{margin:0;color:#666;font-size:13px}
+.buttons{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:15px}
+.button{border:0;border-radius:8px;padding:12px 17px;font-weight:700;font-size:14px;cursor:pointer}
+.primary{background:#087c3e;color:#fff}
+.secondary{background:#e7eee9;color:#17633a}
+.danger{background:#fbe8e8;color:#a21c1c}
+button:disabled{opacity:.42;cursor:not-allowed}
+.native-picker{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
+.native-picker input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.summary div{background:#fff;border-radius:10px;text-align:center;padding:10px}
+.summary strong{display:block;color:#087c3e;font-size:23px}
+.file-list{padding:10px;max-height:170px;overflow:auto}
+.file-item{padding:7px;border-bottom:1px solid #eee;font-size:13px;overflow-wrap:anywhere}
+.progress-card{padding:12px}
+.progress-track{height:14px;border-radius:20px;background:#e4e9e6;overflow:hidden}
+#progressBar{height:100%;width:0;background:#087c3e;transition:width .2s}
+#statusText{text-align:center;margin-top:8px;font-size:13px}
+.table-card{overflow-x:auto}
+table{width:100%;min-width:1050px;border-collapse:collapse}
+th{position:sticky;top:0;background:#087c3e;color:#fff;padding:9px 6px;font-size:12px;white-space:nowrap}
+td{border:1px solid #ddd;padding:8px 6px;text-align:center;font-size:12px}
+.success{color:#087c3e;font-weight:700}
+.warning{color:#b26a00;font-weight:700}
+.hidden{display:none}
+@media(max-width:650px){
+  header{font-size:20px}
+  .button{width:100%}
+  .upload-card h1{font-size:20px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hero"><h1>🔎 SaleDraft Layout Preserve OCR v6</h1><p>PDF/Image → Editable Word/Text/Excel • Exact visual mode + editable overlay mode • Hindi-English preserve</p></div>
-  <div class="note">⚠️ 100% same + 100% editable हर scan PDF में possible नहीं होता, लेकिन यह version सबसे नज़दीकी तरीका लगाता है: page image background + editable text boxes + table/border detection. Best result के लिए 300 DPI साफ scan रखें।</div>
-  <div class="grid">
-    <div class="card"><h2>1) Upload</h2>
-      <div class="field"><label>PDF/Image चुनें</label><input id="file" type="file" accept="application/pdf,image/*"></div>
-      <div class="row"><div class="field"><label>Pages</label><input id="pages" placeholder="blank = all, जैसे 1-3,5"></div><div class="field"><label>Output Mode</label><select id="mode"><option value="editable-layout">Best Editable Layout Word</option><option value="exact-bg">Exact Visual Word + selectable OCR text</option><option value="plain">Plain Editable Text Word</option><option value="excel">PDF Table to Excel CSV</option></select></div></div>
-      <div class="row"><div class="field"><label>Language</label><select id="lang"><option value="hin+eng">Hindi + English</option><option value="hin">Hindi</option><option value="eng">English</option></select></div><div class="field"><label>Quality</label><select id="scale"><option value="2.8">High</option><option value="3.5">Very High (slow)</option><option value="2.0">Fast</option></select></div></div>
-      <button onclick="runOCR()">Extract / Convert</button>
-      <div class="bar"><span id="bar"></span></div><div id="status" class="small">Ready</div>
-      <div><span class="pill">Borders preserve</span><span class="pill">Editable text boxes</span><span class="pill">Hindi cleanup</span><span class="pill">Page-wise</span></div>
+<header>PDF Reader <span class="version">v4.0</span></header>
+
+<main class="container">
+  <section class="upload-card">
+    <h1>Registry PDF Upload</h1>
+    <p>एक साथ अधिकतम 100 PDF</p>
+    <div class="buttons">
+      <div class="button primary native-picker">📁 Select PDFs
+        <input id="fileInput" type="file" accept="application/pdf,.pdf" multiple>
+      </div>
+      <button id="readButton" class="button primary" disabled>▶ Read Data</button>
+      <button id="csvButton" class="button secondary" disabled>⬇ Download CSV</button>
+      <button id="clearButton" class="button danger" disabled>🗑 Clear</button>
     </div>
-    <div class="card"><h2>2) Editable Text Result</h2><textarea id="text" placeholder="Result यहां आएगा, आप edit कर सकते हैं..."></textarea><div class="btns"><button onclick="copyText()">📋 Copy</button><button class="orange" onclick="cleanup()">✨ Cleanup</button><button class="dark" onclick="downloadTxt()">TXT</button><button class="dark" onclick="downloadDoc()">Word</button></div></div>
-  </div>
-  <div class="card" style="margin-top:16px"><h2>3) Layout Preview / Editable Overlay</h2><div id="preview" class="preview">Upload करके Convert दबाएं।</div><div class="btns"><button onclick="downloadLayoutDoc()">⬇ Editable Layout Word</button><button class="dark" onclick="downloadExcel()">⬇ Excel CSV</button><button class="ghost" onclick="clearAll()">Clear</button></div></div>
-  <div class="card" style="margin-top:16px"><h2>Better Result Tips</h2><p class="small">यह browser version है। ChatGPT जैसी 99% correction के लिए Python backend + AI Vision API जरूरी होगा। फिर भी यह v6 scanned table/letter में borders और text position बचाने की पूरी कोशिश करता है।</p></div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
+  </section>
+
+  <section class="summary">
+    <div>Selected<strong id="selectedCount">0</strong></div>
+    <div>Completed<strong id="completedCount">0</strong></div>
+    <div>Check<strong id="checkCount">0</strong></div>
+  </section>
+
+  <section id="fileList" class="file-list hidden"></section>
+
+  <section id="progressArea" class="progress-card hidden">
+    <div class="progress-track"><div id="progressBar"></div></div>
+    <div id="statusText">Ready</div>
+  </section>
+
+  <section class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Sr.</th>
+          <th>Deed Type</th>
+          <th>Registry No.</th>
+          <th>Registration Date</th>
+          <th>Token No.</th>
+          <th>Deed Amount</th>
+          <th>Land Value</th>
+          <th>Stamp Duty</th>
+          <th>Registration Fee</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="resultBody">
+        <tr><td colspan="10">पहले PDF चुनें</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js?v=40"></script>
 <script>
-pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-let pagesData=[], lastText='', csvRows=[];
-const $=id=>document.getElementById(id);function setBar(p){$('bar').style.width=p+'%'}function st(s){$('status').textContent=s}
-function parsePages(str,total){if(!str.trim())return Array.from({length:total},(_,i)=>i+1);let out=[];str.split(',').forEach(x=>{x=x.trim();if(!x)return;if(x.includes('-')){let[a,b]=x.split('-').map(Number);for(let i=a;i<=Math.min(b,total);i++)out.push(i)}else{let n=Number(x);if(n>=1&&n<=total)out.push(n)}});return [...new Set(out)]}
-function cleanHindi(s){return s.replace(/\s+/g,' ').replace(/ ि/g,'ि').replace(/जमिन/g,'जमीन').replace(/कलेक्टर रेट/g,'कलेक्टर रेट').replace(/हिसस/g,'हिस्सा').replace(/रू /g,'₹ ').trim()}
-async function runOCR(){const f=$('file').files[0];if(!f){alert('File चुनें');return}pagesData=[];csvRows=[];lastText='';$('preview').innerHTML='';setBar(0);st('Loading...');if(f.type==='application/pdf')await pdfToOCR(f);else await imageToOCR(f);$('text').value=lastText.trim();st('Done');setBar(100)}
-async function imageToOCR(f){const url=URL.createObjectURL(f);await processImage(url,1)}
-async function pdfToOCR(f){const buf=await f.arrayBuffer();const pdf=await pdfjsLib.getDocument({data:buf}).promise;const nums=parsePages($('pages').value,pdf.numPages);let done=0;for(const n of nums){st('Page '+n+' / '+pdf.numPages);const page=await pdf.getPage(n);const scale=parseFloat($('scale').value);const vp=page.getViewport({scale});const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');canvas.width=vp.width;canvas.height=vp.height;await page.render({canvasContext:ctx,viewport:vp}).promise;await processCanvas(canvas,n);done++;setBar(Math.round(done/nums.length*100))}}
-async function processImage(url,pageNo){const img=new Image();img.src=url;await img.decode();const c=document.createElement('canvas'),ctx=c.getContext('2d');c.width=img.naturalWidth;c.height=img.naturalHeight;ctx.drawImage(img,0,0);await processCanvas(c,pageNo)}
-async function processCanvas(canvas,pageNo){const lang=$('lang').value;const dataUrl=canvas.toDataURL('image/png');const res=await Tesseract.recognize(dataUrl,lang,{logger:m=>{if(m.progress)setBar(Math.round(m.progress*100))}});const text=cleanHindi(res.data.text||'');lastText+='\n\n--- Page '+pageNo+' ---\n'+text;csvRows.push(['Page '+pageNo]);text.split(/\n+/).forEach(line=>csvRows.push(line.split(/\s{2,}|\t/)));makeOverlay(canvas,res.data,pageNo)}
-function makeOverlay(canvas,data,pageNo){const scale= Math.min(900/canvas.width,1);const box=document.createElement('div');box.className='pagebox';box.style.width=(canvas.width*scale)+'px';box.style.height=(canvas.height*scale)+'px';const img=document.createElement('img');img.src=canvas.toDataURL('image/jpeg',0.8);img.style.width='100%';img.style.height='100%';img.style.display='block';box.appendChild(img);(data.words||[]).forEach(w=>{if(!w.text.trim())return;const b=w.bbox;const el=document.createElement('span');el.className='ocrword';el.contentEditable='true';el.textContent=w.text;el.style.left=(b.x0*scale)+'px';el.style.top=(b.y0*scale)+'px';el.style.fontSize=Math.max(8,(b.y1-b.y0)*scale*0.85)+'px';box.appendChild(el)});const title=document.createElement('div');title.innerHTML='<b>Page '+pageNo+'</b> — background exact, ऊपर text editable है';$('preview').appendChild(title);$('preview').appendChild(box)}
-function copyText(){navigator.clipboard.writeText($('text').value);st('Copied')}function cleanup(){$('text').value=cleanHindi($('text').value);st('Cleaned')}function downloadTxt(){dl(new Blob([$('text').value],{type:'text/plain;charset=utf-8'}),'saledraft_text.txt')}function downloadExcel(){let csv=csvRows.map(r=>r.map(x=>'"'+String(x||'').replace(/"/g,'""')+'"').join(',')).join('\n');dl(new Blob([csv],{type:'text/csv;charset=utf-8'}),'saledraft_table.csv')}function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click()}
-async function downloadDoc(){const {Document,Packer,Paragraph,TextRun}=docx;const doc=new Document({sections:[{children:$('text').value.split('\n').map(l=>new Paragraph({children:[new TextRun(l)]}))}]});const blob=await Packer.toBlob(doc);dl(blob,'saledraft_editable_text.docx')}
-async function downloadLayoutDoc(){alert('Browser security के कारण exact editable overlay Word में limited है। अभी preview में edit करें और Word के लिए Text Word डाउनलोड करें। 100% editable layout के लिए Python backend version चाहिए।');await downloadDoc()}
-function clearAll(){pagesData=[];lastText='';csvRows=[];$('text').value='';$('preview').innerHTML='';setBar(0);st('Ready')}
+"use strict";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const $ = id => document.getElementById(id);
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrKQrXyFjLEiYC26Z9DhXGiXu1ujDTEOjRZ-4BojkxXMmwiPPCbjkQu5AYmL6-nYX1/exec";
+
+async function saveToGoogleSheet(record) {
+  try {
+    await fetch(WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        deedType: record.deedType || "",
+        registryNumber: record.registryNumber || "",
+        registrationDate: record.registrationDate || "",
+        tokenNumber: record.tokenNumber || "",
+        deedAmount: record.deedAmount || "0.00",
+        landValue: record.landValue || "0.00",
+        stampDuty: record.stampDuty || "0.00",
+        registrationFees: record.registrationFees || "0.00",
+        status: record.status || "",
+        fileName: record.fileName || ""
+      })
+    });
+  } catch (error) {
+    console.error("Google Sheet save failed:", error);
+  }
+}
+
+const fileInput = $("fileInput");
+const readButton = $("readButton");
+const csvButton = $("csvButton");
+const clearButton = $("clearButton");
+const fileList = $("fileList");
+const progressArea = $("progressArea");
+const progressBar = $("progressBar");
+const statusText = $("statusText");
+const resultBody = $("resultBody");
+const selectedCount = $("selectedCount");
+const completedCount = $("completedCount");
+const checkCount = $("checkCount");
+
+let selectedFiles = [];
+let results = [];
+
+fileInput.addEventListener("change", () => {
+  const chosen = Array.from(fileInput.files || []);
+  const files = chosen.filter(file =>
+    file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")
+  );
+
+  if (chosen.length > 100) {
+    alert("एक बार में अधिकतम 100 PDF चुनें।");
+    fileInput.value = "";
+    return;
+  }
+
+  if (chosen.length && files.length !== chosen.length) {
+    alert("सिर्फ PDF files चुनें।");
+  }
+
+  selectedFiles = files;
+  results = [];
+  selectedCount.textContent = String(files.length);
+  completedCount.textContent = "0";
+  checkCount.textContent = "0";
+  readButton.disabled = files.length === 0;
+  csvButton.disabled = true;
+  clearButton.disabled = files.length === 0;
+  renderFiles();
+
+  resultBody.innerHTML = files.length
+    ? `<tr><td colspan="10">${files.length} PDF चुनी गई हैं। अब Read Data दबाएँ।</td></tr>`
+    : `<tr><td colspan="10">पहले PDF चुनें</td></tr>`;
+});
+
+clearButton.addEventListener("click", resetAll);
+
+function resetAll() {
+  selectedFiles = [];
+  results = [];
+  fileInput.value = "";
+  selectedCount.textContent = "0";
+  completedCount.textContent = "0";
+  checkCount.textContent = "0";
+  readButton.disabled = true;
+  csvButton.disabled = true;
+  clearButton.disabled = true;
+  fileList.innerHTML = "";
+  fileList.classList.add("hidden");
+  progressArea.classList.add("hidden");
+  progressBar.style.width = "0%";
+  resultBody.innerHTML = `<tr><td colspan="10">पहले PDF चुनें</td></tr>`;
+}
+
+function renderFiles() {
+  if (!selectedFiles.length) {
+    fileList.classList.add("hidden");
+    return;
+  }
+  fileList.classList.remove("hidden");
+  fileList.innerHTML = selectedFiles.map((file, i) =>
+    `<div class="file-item">${i + 1}. ${escapeHtml(file.name)}</div>`
+  ).join("");
+}
+
+readButton.addEventListener("click", async () => {
+  if (!selectedFiles.length) return;
+
+  results = [];
+  resultBody.innerHTML = "";
+  progressArea.classList.remove("hidden");
+  readButton.disabled = true;
+  csvButton.disabled = true;
+
+  let completed = 0;
+  let checks = 0;
+
+  for (let i = 0; i < selectedFiles.length; i++) {
+    const file = selectedFiles[i];
+    setProgress(i, selectedFiles.length,
+      `Reading ${i + 1}/${selectedFiles.length}: ${file.name}`);
+
+    try {
+      const text = await extractFirstTwoPages(file);
+      const record = parseRegistryText(text);
+      record.fileName = file.name;
+
+      const identityOkay = Boolean(
+        record.deedType &&
+        record.registryNumber &&
+        record.registrationDate &&
+        record.tokenNumber
+      );
+
+      record.status = identityOkay ? "Completed" : "Check";
+      if (identityOkay) completed++;
+      else checks++;
+
+      results.push(record);
+      await saveToGoogleSheet(record);
+      appendRow(record, i + 1);
+    } catch (error) {
+      console.error(file.name, error);
+      const record = emptyRecord();
+      record.fileName = file.name;
+      record.status = "Check";
+      results.push(record);
+      checks++;
+      appendRow(record, i + 1);
+    }
+
+    completedCount.textContent = String(completed);
+    checkCount.textContent = String(checks);
+  }
+
+  setProgress(selectedFiles.length, selectedFiles.length,
+    `Completed: ${completed} | Check: ${checks}`);
+
+  readButton.disabled = false;
+  csvButton.disabled = results.length === 0;
+});
+
+async function extractFirstTwoPages(file) {
+  const buffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({data: buffer}).promise;
+  const pageCount = pdf.numPages;
+  const pageTexts = [];
+
+  for (let pageNumber = 1; pageNumber <= pageCount; pageNumber++) {
+    statusText.textContent = `PDF Page ${pageNumber}/${pageCount} पढ़ रहा है...`;
+    const page = await pdf.getPage(pageNumber);
+    const content = await page.getTextContent();
+    const lines = groupPdfItemsIntoLines(content.items);
+    pageTexts.push(lines.join("\n"));
+  }
+
+  return normalizeText(pageTexts.join("\n"));
+}
+
+function groupPdfItemsIntoLines(items) {
+  const usable = items
+    .filter(item => String(item.str || "").trim())
+    .map(item => ({
+      text: String(item.str || "").trim(),
+      x: Number(item.transform?.[4] || 0),
+      y: Number(item.transform?.[5] || 0)
+    }))
+    .sort((a, b) => (b.y - a.y) || (a.x - b.x));
+
+  const rows = [];
+  const tolerance = 4;
+
+  for (const item of usable) {
+    let row = rows.find(candidate => Math.abs(candidate.y - item.y) <= tolerance);
+    if (!row) {
+      row = {y: item.y, items: []};
+      rows.push(row);
+    }
+    row.items.push(item);
+  }
+
+  return rows
+    .sort((a, b) => b.y - a.y)
+    .map(row => row.items
+      .sort((a, b) => a.x - b.x)
+      .map(item => item.text)
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim()
+    )
+    .filter(Boolean);
+}
+
+
+
+function parseRegistryText(text) {
+  const clean = normalizeText(text);
+  const compact = compactText(clean);
+  const record = emptyRecord();
+
+  record.deedType = extractDeedType(clean);
+  record.registryNumber =
+    extractByCompactLabel(compact, ["प्रलेखक्र", "प्रलेखक्रमांक", "registrationno", "registrationnumber", "regno"], "integer") ||
+    firstMatch(clean, [
+      /Registration\s*No\.?\s*[:\-]?\s*(\d+)/i,
+      /Registration\s*Number\s*[:\-]?\s*(\d+)/i
+    ]);
+
+  record.registrationDate = normalizeDate(
+    extractByCompactLabel(compact, ["पंजीकरणदिनांक", "registrationdate"], "date") ||
+    firstMatch(clean, [
+      /Registration\s*No\.?\s*[:\-]?\s*\d+[\s\S]{0,50}?Date\s*[:\-]?\s*(\d{1,2}\s*[\/-]\s*\d{1,2}\s*[\/-]\s*\d{4})/i,
+      /\bDate\s*[:\-]?\s*(\d{1,2}\s*[\/-]\s*\d{1,2}\s*[\/-]\s*\d{4})/i
+    ])
+  );
+
+  record.tokenNumber = extractToken(clean) || firstMatch(clean, [/\b(PAN_[A-Z0-9_]+)\b/i]);
+
+  const finance = extractFinancialFields(clean);
+  record.deedAmount = finance.deedAmount;
+  record.landValue = finance.landValue;
+  record.stampDuty = finance.stampDuty;
+  record.registrationFees = finance.registrationFees;
+  return record;
+}
+
+function extractFinancialFields(text) {
+  const out = {deedAmount:"0.00", landValue:"0.00", stampDuty:"0.00", registrationFees:"0.00"};
+  const lines = normalizeText(text).split(/\n+/).map(x=>x.trim()).filter(Boolean);
+
+  for (let i=0;i<lines.length;i++) {
+    const windowText = lines.slice(i, Math.min(lines.length, i+3)).join(" ");
+    const fused = fuzzyHindi(windowText);
+
+    if (out.deedAmount === "0.00" && hasDealWords(fused)) {
+      out.deedAmount = extractAmountAfterPattern(windowText, [
+        /लेन\s*[- ]?\s*देन\s*रा\s*शि/i,
+        /लेन\s*[- ]?\s*देन\s*राशि/i,
+        /transaction\s*amount/i,
+        /consideration\s*amount/i,
+        /deed\s*amount/i
+      ]);
+    }
+
+    if (out.landValue === "0.00" && hasCollectorWords(fused)) {
+      out.landValue = extractAmountAfterPattern(windowText, [
+        /क\s*ले\s*क्टर\s*दर/i,
+        /कलेक्टर\s*दर/i,
+        /कलैक्टर\s*दर/i,
+        /collector\s*(?:rate|value)/i,
+        /land\s*value/i
+      ]);
+    }
+
+    if (out.stampDuty === "0.00" && hasStampWords(fused)) {
+      out.stampDuty = extractAmountAfterPattern(windowText, [
+        /कुल\s*स्टा\s*म्प\s*शु\s*ल्क/i,
+        /कुल\s*स्टाम्प\s*शुल्क/i,
+        /कुल\s*स्टांप\s*शुल्क/i,
+        /stamp\s*duty(?:\s*paid)?/i
+      ]);
+    }
+
+    if (out.registrationFees === "0.00" && hasFeeWords(fused)) {
+      out.registrationFees = extractAmountAfterPattern(windowText, [
+        /पंजी\s*करण\s*फी\s*स/i,
+        /पंजीकरण\s*फीस/i,
+        /पंजी\s*करण\s*शुल्क/i,
+        /registration\s*fees?/i
+      ]);
+    }
+  }
+
+  if (out.stampDuty === "0.00") out.stampDuty = formatAmount(firstMatch(text,[/Stamp\s*Duty\s*Paid\s*:\s*₹?\s*([\d,]+(?:\.\d{1,2})?)/i]));
+  if (out.registrationFees === "0.00") out.registrationFees = formatAmount(firstMatch(text,[/Registration\s*Fees?\s*:\s*₹?\s*([\d,]+(?:\.\d{1,2})?)/i]));
+  return out;
+}
+
+function fuzzyHindi(value) {
+  return normalizeText(value).toLowerCase()
+    .replace(/[₹:;|()[\]{}–—\-_,./]/g, "")
+    .replace(/\s+/g, "")
+    .replace(/स्टांप/g,"स्टाम्प")
+    .replace(/कलैक्टर/g,"कलेक्टर");
+}
+function hasDealWords(x){return (x.includes("लेन")&&x.includes("देन")&&(x.includes("राशि")||x.includes("राश")))||x.includes("transactionamount")||x.includes("considerationamount")||x.includes("deedamount");}
+function hasCollectorWords(x){return (x.includes("कलेक्टर")&&x.includes("दर"))||x.includes("collectorrate")||x.includes("collectorvalue")||x.includes("landvalue");}
+function hasStampWords(x){return ((x.includes("स्टाम्प")||x.includes("स्टांप"))&&x.includes("शुल्क"))||x.includes("stampdutypaid")||x.includes("stampduty");}
+function hasFeeWords(x){return ((x.includes("पंजी")||x.includes("पंजीकरण"))&&(x.includes("फीस")||x.includes("शुल्क")))||x.includes("registrationfees")||x.includes("registrationfee");}
+
+function extractAmountAfterPattern(text, patterns) {
+  const clean = normalizeText(text);
+  for (const pattern of patterns) {
+    const match = clean.match(pattern);
+    if (!match) continue;
+    let after = clean.slice(match.index + match[0].length, match.index + match[0].length + 100);
+    after = after.split(/(?:ई-?चा\s*ला\s*न|GRN|Token|Property\s*Id|Stamp\s*No|Cheque|RTGS|NEFT|UTR|लेन\s*[- ]?\s*देन|कलेक्टर\s*दर|कुल\s*स्टा\s*म्प|पंजी\s*करण\s*फी\s*स)/i)[0];
+    const number = after.match(/(\d[\d,]{0,14}(?:\.\d{1,2})?)/);
+    return number ? formatAmount(number[1]) : "0.00";
+  }
+  return "0.00";
+}
+
+function extractDeedType(text) {
+  const lines = text.split(/\n+/).map(x => x.trim()).filter(Boolean);
+  const exact = [
+    ["TRANSFER OF IMMOVABLE PROPERTY", /TRANSFER\s+OF\s+IMMOVABLE\s+PROPERTY\s+DEED/i],
+    ["POWER OF ATTORNEY", /POWER\s+OF\s+ATTORNEY\s+DEED/i],
+    ["CONVEYANCE", /CONVEYANCE\s+DEED/i], ["AGREEMENT", /AGREEMENT\s+DEED/i],
+    ["TARTIMA", /TARTIMA\s+DEED/i], ["TRUST", /TRUST\s+DEED/i], ["SALE", /SALE\s+DEED/i],
+    ["GIFT", /GIFT\s+DEED/i], ["WILL", /WILL\s+DEED/i], ["LEASE", /LEASE\s+DEED/i],
+    ["ADOPTION", /ADOPTION\s+DEED/i], ["RECTIFICATION", /RECTIFICATION\s+DEED/i],
+    ["CANCELLATION", /CANCELLATION\s+DEED/i], ["PARTITION", /PARTITION\s+DEED/i], ["RELEASE", /RELEASE\s+DEED/i]
+  ];
+  for (const [label, pattern] of exact) if (pattern.test(text)) return label;
+  for (const line of lines) { const m=line.match(/^([A-Z][A-Z /&()'-]{1,80})\s+DEED$/i); if(m) return m[1].replace(/\s+/g," ").trim().toUpperCase(); }
+  const purpose=firstMatch(text,[/Purpose\s*:\s*([A-Z][A-Z ]{1,60})/i]);
+  return purpose ? purpose.toUpperCase().trim() : "";
+}
+
+function normalizeText(value) {
+  return String(value || "").replace(/\u00a0/g," ").replace(/[\u200b\u200c\u200d\ufeff]/g,"").replace(/[–—]/g,"-").replace(/[ \t]+/g," ").replace(/\n{2,}/g,"\n").trim();
+}
+function compactText(value) { return normalizeText(value).toLowerCase().replace(/[₹:;|()[\]{}–—\-_,/]/g,"").replace(/\s+/g,""); }
+function extractByCompactLabel(compact, labels, kind) {
+  for (const label of labels) {
+    const index=compact.indexOf(label); if(index===-1) continue;
+    const after=compact.slice(index+label.length,index+label.length+80);
+    if(kind==="integer"){const m=after.match(/(\d{1,10})/); if(m) return m[1];}
+    if(kind==="date"){const m=after.match(/(\d{1,2})(\d{1,2})(\d{4})/); if(m) return `${m[1]}/${m[2]}/${m[3]}`;}
+  }
+  return "";
+}
+function extractToken(text){const m=String(text||"").match(/\b(PAN_[A-Z0-9_]+)\b/i); return m?m[1]:"";}
+
+function firstMatch(text, patterns) {
+  for (const pattern of patterns) {
+    const match = String(text || "").match(pattern);
+    if (match && match[1]) return match[1].trim();
+  }
+  return "";
+}
+
+function normalizeDate(value) {
+  if (!value) return "";
+  const s = String(value).replace(/-/g, "/");
+  const m = s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  return m ? `${m[1].padStart(2,"0")}/${m[2].padStart(2,"0")}/${m[3]}` : s;
+}
+
+function formatAmount(value) {
+  const cleaned = String(value || "")
+    .replace(/,/g, "")
+    .replace(/[^\d.]/g, "");
+  const number = Number(cleaned);
+  return Number.isFinite(number) ? number.toFixed(2) : "0.00";
+}
+
+function emptyRecord() {
+  return {
+    fileName: "",
+    deedType: "",
+    registryNumber: "",
+    registrationDate: "",
+    tokenNumber: "",
+    deedAmount: "0.00",
+    landValue: "0.00",
+    stampDuty: "0.00",
+    registrationFees: "0.00",
+    status: ""
+  };
+}
+
+function appendRow(record, serial) {
+  const statusClass = record.status === "Completed" ? "success" : "warning";
+  resultBody.insertAdjacentHTML("beforeend", `
+    <tr>
+      <td>${serial}</td>
+      <td>${escapeHtml(record.deedType || "Not Found")}</td>
+      <td>${escapeHtml(record.registryNumber || "Not Found")}</td>
+      <td>${escapeHtml(record.registrationDate || "Not Found")}</td>
+      <td>${escapeHtml(record.tokenNumber || "Not Found")}</td>
+      <td>${record.deedAmount}</td>
+      <td>${record.landValue}</td>
+      <td>${record.stampDuty}</td>
+      <td>${record.registrationFees}</td>
+      <td class="${statusClass}">${record.status}</td>
+    </tr>
+  `);
+}
+
+function setProgress(done, total, message) {
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  progressBar.style.width = percent + "%";
+  statusText.textContent = message;
+}
+
+csvButton.addEventListener("click", () => {
+  if (!results.length) return;
+
+  const rows = [[
+    "Deed Type", "Registry Number", "Registration Date", "Token Number",
+    "Deed Amount", "Land Value", "Stamp Duty", "Registration Fee"
+  ], ...results.map(r => [
+    r.deedType, r.registryNumber, r.registrationDate, r.tokenNumber,
+    r.deedAmount, r.landValue, r.stampDuty, r.registrationFees
+  ])];
+
+  const csv = "\uFEFF" + rows.map(row => row.map(csvCell).join(",")).join("\n");
+  const blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "registry-pdf-data.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+function csvCell(value) {
+  return `"${String(value ?? "").replace(/"/g, '""')}"`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 </script>
-</body></html>
+</body>
+</html>
